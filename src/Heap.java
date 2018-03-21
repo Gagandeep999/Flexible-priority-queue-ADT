@@ -1,11 +1,17 @@
-public class Binary_Tree<K extends Comparable<K>, V> { // K implements Comparable
+/*
+Author : Gagandeep Singh
+Date   : March 19, 2017
+Purpose: An array implementation of a heap.
+ */
 
-    private class BinaryTreeNode<K extends Comparable<K>, V>  implements Comparable<BinaryTreeNode<K, V>>{
+public class Heap<K extends Comparable<K>, V> {
+
+    private class HeapNode<K extends Comparable<K>, V>  implements Comparable<HeapNode<K, V>>{
 
         private K key;
         private V value;
 
-        public BinaryTreeNode(K k, V v) {
+        public HeapNode(K k, V v) {
             this.key = k;
             this.value = v;
         }
@@ -26,7 +32,7 @@ public class Binary_Tree<K extends Comparable<K>, V> { // K implements Comparabl
             return "Element: "+getValue()+" has Key: "+getKey();
         }
         @Override
-        public int compareTo(BinaryTreeNode<K, V> o) {
+        public int compareTo(HeapNode<K, V> o) {
             if ((o == null) || (this.getClass() != o.getClass()))
                 return -1;
             else if (state == "MIN"){
@@ -37,11 +43,11 @@ public class Binary_Tree<K extends Comparable<K>, V> { // K implements Comparabl
     }
 
     static String state;
-    BinaryTreeNode root;
-    BinaryTreeNode[] arr = new BinaryTreeNode[2];
+    HeapNode root;
+    HeapNode[] arr = new HeapNode[2];
     static int arrayIndex = 0;
 
-    public Binary_Tree(String s) {
+    public Heap(String s) {
         this.state = s;
         root = null;
     }
@@ -50,14 +56,19 @@ public class Binary_Tree<K extends Comparable<K>, V> { // K implements Comparabl
         return state;
     }
     public static void setState(String state) {
-        Binary_Tree.state = state;
+        Heap.state = state;
     }
 
-    public BinaryTreeNode<K,V> remove(){
-        BinaryTreeNode<K,V> topmost = null;
-        if(arrayIndex == 1){
+    public HeapNode<K,V> remove(){
+        HeapNode<K,V> topmost = null;
+        if (arrayIndex == 0){
+            System.out.println("No more elements to return!!");
+        }
+        else if(arrayIndex == 1){
             topmost = arr[0];
             System.out.println("This is the last element. No more elements to return.");
+            arrayIndex--;
+            arr[arrayIndex] = null;
         }
         else{
             topmost = arr[0];
@@ -70,7 +81,7 @@ public class Binary_Tree<K extends Comparable<K>, V> { // K implements Comparabl
     }
 
     public void insert(K key, V value) {
-        BinaryTreeNode<K, V> newest = new BinaryTreeNode<>(key, value);
+        HeapNode<K, V> newest = new HeapNode<>(key, value);
         if(arrayIndex == arr.length){
             arr = changeSize(arr);
         }
@@ -85,7 +96,7 @@ public class Binary_Tree<K extends Comparable<K>, V> { // K implements Comparabl
         }
     }
 
-    public BinaryTreeNode<K,V> top() {
+    public HeapNode<K,V> top() {
         return arr[0];
     }
 
@@ -130,10 +141,10 @@ public class Binary_Tree<K extends Comparable<K>, V> { // K implements Comparabl
         return "Current number of elements in the Priority Queue are: "+arrayIndex;
     }
 
-    private void heapify(int currentIndex, BinaryTreeNode<K, V> node){
+    private void heapify(int currentIndex, HeapNode<K, V> node){
         int parent = (currentIndex - 1) / 2;
         if (arr[parent].compareTo(node) > 0){
-            BinaryTreeNode<K,V> temp = arr[parent];
+            HeapNode<K,V> temp = arr[parent];
             arr[parent] = node;
             arr[currentIndex] = temp;
             heapify(parent, node);
@@ -141,13 +152,15 @@ public class Binary_Tree<K extends Comparable<K>, V> { // K implements Comparabl
     }
 
     public void display(){
-        System.out.println(state());
-        for (int i=0 ; i<arr.length;i++)
-            if (arr[i] != null)
-                System.out.println("arr["+i+"] "+arr[i]);
+        if (!isEmpty()){
+            System.out.println(state());
+            for (int i=0 ; i<arr.length;i++)
+                if (arr[i] != null)
+                    System.out.println("arr["+i+"] "+arr[i]);
+        }
     }
 
-    private void afterRemoving(int index, BinaryTreeNode<K,V> node){
+    private void afterRemoving(int index, HeapNode<K,V> node){
         int rightChild = (2*index) + 2;
         int leftChild = (2*index) + 1;
         int priorityChild = 0;
@@ -155,7 +168,7 @@ public class Binary_Tree<K extends Comparable<K>, V> { // K implements Comparabl
             if (arr[rightChild].compareTo(arr[leftChild]) > 0){
                 priorityChild = leftChild;
                 if (arr[index].compareTo(arr[priorityChild]) > 0){
-                    BinaryTreeNode<K,V> temp = arr[leftChild];
+                    HeapNode<K,V> temp = arr[leftChild];
                     arr[leftChild] = arr[index];
                     arr[index] = temp;
                     afterRemoving(leftChild, arr[leftChild]);
@@ -164,16 +177,16 @@ public class Binary_Tree<K extends Comparable<K>, V> { // K implements Comparabl
             else {
                 priorityChild = rightChild;
                 if (arr[index].compareTo(arr[priorityChild]) > 0){
-                    BinaryTreeNode<K,V> temp = arr[rightChild];
+                    HeapNode<K,V> temp = arr[rightChild];
                     arr[rightChild] = arr[index];
                     arr[index] = temp;
                     afterRemoving(rightChild, arr[rightChild]);
                 }
             }
         }
-        else if ((leftChild<arrayIndex)&&(arr[rightChild] == null)){
+        else if ((leftChild<arrayIndex)&&(arr[leftChild] != null)){
             if (arr[index].compareTo(arr[leftChild]) > 0){
-                BinaryTreeNode<K,V> temp = arr[leftChild];
+                HeapNode<K,V> temp = arr[leftChild];
                 arr[leftChild] = arr[index];
                 arr[index] = temp;
                 afterRemoving(leftChild, arr[leftChild]);
@@ -182,7 +195,7 @@ public class Binary_Tree<K extends Comparable<K>, V> { // K implements Comparabl
         else {
             if (((leftChild<arrayIndex))) {
                 if (arr[index].compareTo(arr[leftChild]) > 0) {
-                    BinaryTreeNode<K, V> temp = arr[rightChild];
+                    HeapNode<K, V> temp = arr[rightChild];
                     arr[rightChild] = arr[index];
                     arr[index] = temp;
                     afterRemoving(rightChild, arr[rightChild]);
@@ -191,9 +204,9 @@ public class Binary_Tree<K extends Comparable<K>, V> { // K implements Comparabl
         }
     }
 
-    private BinaryTreeNode[] changeSize(BinaryTreeNode[] arr){
+    private HeapNode[] changeSize(HeapNode[] arr){
         int newLength = arr.length * 2;
-        BinaryTreeNode[] arr2 = new BinaryTreeNode[newLength];
+        HeapNode[] arr2 = new HeapNode[newLength];
         for (int i=0;i<arr.length;i++){
             arr2[i] = arr[i];
         }

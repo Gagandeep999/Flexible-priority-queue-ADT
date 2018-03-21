@@ -1,3 +1,9 @@
+/*
+Author : Gagandeep Singh
+Date   : March 19, 2017
+Purpose: main() method to verify the functionality of the Heap.
+ */
+
 public class Test {
 
     public static void main(String args[]){
@@ -7,54 +13,79 @@ public class Test {
 //        System.out.println("5.compareTo(3) returns: "+a.compareTo(b));
 //        System.out.println("3.compareTo(5) returns: "+b.compareTo(a));
 
+        Heap<Integer, String> heap = new Heap<>("MIN");
+        heap.insert(9,"PineAPPLE");
+        heap.insert(3,"Oranges");
+        heap.insert(15,"Peaches");
+        System.out.println("Top element is :" + heap.top());
+        heap.insert(1,"Amrood");
+        heap.insert(20,"Banana");
+        heap.insert(5,"Grapes");
 
-        Binary_Tree<Integer, String> tree = new Binary_Tree<>("MIN");
-//        tree.addRoot(26,"Apple");
-        tree.insert(9,"PineAPPLE");
-        tree.insert(3,"Oranges");
-        tree.insert(15,"Peaches");
-        tree.insert(1,"Amrood");
-        tree.insert(20,"Banana");
-        tree.insert(5,"Grapes");
+        heap.display();
 
-        tree.display();
+        System.out.println(heap.state());
 
-        System.out.println(tree.state());
+        heap.toggle();
 
-        tree.toggle();
+        System.out.println("NOW: "+heap.state());
 
-        System.out.println(tree.state());
+        heap.display();
 
-        tree.display();
+        System.out.println("calling switchToMax() :");
 
+        heap.switchToMax();
 
+        heap.display();
 
+        System.out.println("calling switchToMin() :");
 
+        heap.switchToMin();
 
+        System.out.println("Removing: ");
+        System.out.println(heap.remove());
+        heap.display();
+        System.out.println("Top element is :" + heap.top());
+        System.out.println(heap.remove());
+        heap.display();
+        System.out.println(heap.remove());
+        heap.display();
+        System.out.println(heap.remove());
+        heap.display();
+        heap.switchToMax();
+        System.out.println(heap.remove());
+        heap.display();
+        System.out.println(heap.remove());
+        heap.display();
+        System.out.println(heap.remove());
+        heap.display();
+        System.out.println(heap.remove());
+        heap.display();
+        heap.switchToMin();
+        heap.switchToMax();
+        System.out.println(heap.remove());
+        heap.display();
 
-//        System.out.println("calling switchToMax() :");
-//
-//        tree.switchToMax();
-////
-//        tree.display();
-////
-//        System.out.println("calling switchToMin() :");
-//
-//        tree.switchToMin();
-//
-        System.out.println("Removing two elements");
-        System.out.println(tree.remove());
-        System.out.println(tree.remove());
-        System.out.println(tree.remove());
-//        System.out.println(tree.remove());
-//        System.out.println(tree.remove());
-//        System.out.println(tree.remove());
-//        System.out.println(tree.remove());
-//        System.out.println(tree.remove());
-//        System.out.println(tree.remove());
+        heap.insert(2,"BMW");
+        heap.insert(10,"Mercedes");
+        heap.insert(21,"Audi");
 
+        heap.display();
 
-//        tree.display();
+        heap.toggle();
 
+        heap.display();
+        System.out.println(heap.remove());
+        heap.display();
+        heap.switchToMax();
+        System.out.println(heap.remove());
+        heap.display();
+        heap.switchToMax();
+        System.out.println(heap.remove());
+        heap.display();
+        System.out.println(heap.remove());
+        heap.display();
+        System.out.println(heap.remove());
+        heap.display();
     }
 }
