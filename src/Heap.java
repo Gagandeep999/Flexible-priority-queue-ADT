@@ -38,7 +38,7 @@ public class Binary_Tree<K extends Comparable<K>, V> { // K implements Comparabl
 
     static String state;
     BinaryTreeNode root;
-    BinaryTreeNode[] arr = new BinaryTreeNode[10];
+    BinaryTreeNode[] arr = new BinaryTreeNode[2];
     static int arrayIndex = 0;
 
     public Binary_Tree(String s) {
@@ -90,10 +90,10 @@ public class Binary_Tree<K extends Comparable<K>, V> { // K implements Comparabl
     }
 
     public void toggle(){
-        if (state == "MIN"){
+        if (state.equalsIgnoreCase("MIN")){
             switchToMax();
         }
-        else{
+        else if (state.equalsIgnoreCase("MAX")){
             switchToMin();
         }
     }
@@ -103,7 +103,7 @@ public class Binary_Tree<K extends Comparable<K>, V> { // K implements Comparabl
         for (int i=0; i<arrayIndex; i++){
             afterRemoving(i, arr[i]);
         }
-        for (int i=arrayIndex; i>=00; i--){
+        for (int i=arrayIndex; i>=0; i--){
             afterRemoving(i, arr[i]);
         }
     }
@@ -113,7 +113,7 @@ public class Binary_Tree<K extends Comparable<K>, V> { // K implements Comparabl
         for (int i=0; i<arrayIndex; i++){
             afterRemoving(i, arr[i]);
         }
-        for (int i=arrayIndex; i>=00; i--){
+        for (int i=arrayIndex; i>=0; i--){
             afterRemoving(i, arr[i]);
         }
     }
@@ -144,7 +144,7 @@ public class Binary_Tree<K extends Comparable<K>, V> { // K implements Comparabl
         System.out.println(state());
         for (int i=0 ; i<arr.length;i++)
             if (arr[i] != null)
-                System.out.println(arr[i]+" ");
+                System.out.println("arr["+i+"] "+arr[i]);
     }
 
     private void afterRemoving(int index, BinaryTreeNode<K,V> node){
@@ -171,7 +171,7 @@ public class Binary_Tree<K extends Comparable<K>, V> { // K implements Comparabl
                 }
             }
         }
-        else if (((rightChild<arrayIndex) && (leftChild<arrayIndex))&&(arr[rightChild] == null)){
+        else if ((leftChild<arrayIndex)&&(arr[rightChild] == null)){
             if (arr[index].compareTo(arr[leftChild]) > 0){
                 BinaryTreeNode<K,V> temp = arr[leftChild];
                 arr[leftChild] = arr[index];
@@ -180,11 +180,13 @@ public class Binary_Tree<K extends Comparable<K>, V> { // K implements Comparabl
             }
         }
         else {
-            if (((rightChild<arrayIndex) && (leftChild<arrayIndex))&&(arr[index].compareTo(arr[rightChild]) > 0)){
-                BinaryTreeNode<K,V> temp = arr[rightChild];
-                arr[rightChild] = arr[index];
-                arr[index] = temp;
-                afterRemoving(rightChild, arr[rightChild]);
+            if (((leftChild<arrayIndex))) {
+                if (arr[index].compareTo(arr[leftChild]) > 0) {
+                    BinaryTreeNode<K, V> temp = arr[rightChild];
+                    arr[rightChild] = arr[index];
+                    arr[index] = temp;
+                    afterRemoving(rightChild, arr[rightChild]);
+                }
             }
         }
     }
