@@ -8,11 +8,6 @@ public class Test {
 
     public static void main(String args[]){
 
-//        Integer a = 5;
-//        Integer b = 3;
-//        System.out.println("5.compareTo(3) returns: "+a.compareTo(b));
-//        System.out.println("3.compareTo(5) returns: "+b.compareTo(a));
-
         Heap<Integer, String> heap = new Heap<>("MIN");
         heap.insert(9,"PineAPPLE");
         heap.insert(3,"Oranges");
@@ -32,17 +27,17 @@ public class Test {
 
         heap.display();
 
-        System.out.println("calling switchToMax() :");
+        System.out.println("calling switchToMax()\n");
 
         heap.switchToMax();
 
         heap.display();
 
-        System.out.println("calling switchToMin() :");
+        System.out.println("calling switchToMin()\n");
 
         heap.switchToMin();
 
-        System.out.println("Removing: ");
+        System.out.println("Removing some elements \n");
         System.out.println(heap.remove());
         heap.display();
         System.out.println("Top element is :" + heap.top());
@@ -66,7 +61,7 @@ public class Test {
         System.out.println(heap.remove());
         heap.display();
 
-        heap.insert(2,"BMW");
+        heap.insert(5,"BMW");
         heap.insert(10,"Mercedes");
         heap.insert(21,"Audi");
 
@@ -77,14 +72,18 @@ public class Test {
         heap.display();
         System.out.println(heap.remove());
         heap.display();
+        System.out.println("calling switchToMax()\n");
         heap.switchToMax();
         System.out.println(heap.remove());
         heap.display();
+        System.out.println("calling switchToMax()\n");
         heap.switchToMax();
         System.out.println(heap.remove());
         heap.display();
         System.out.println(heap.remove());
         heap.display();
+        System.out.println("calling switchToMin()\n");
+        heap.switchToMin();
         System.out.println(heap.remove());
         heap.display();
     }

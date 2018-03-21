@@ -29,7 +29,7 @@ public class Heap<K extends Comparable<K>, V> {
         }
         @Override
         public String toString() {
-            return "Element: "+getValue()+" has Key: "+getKey();
+            return "Key: "+this.key+"--------->Value: "+this.value;
         }
         @Override
         public int compareTo(HeapNode<K, V> o) {
@@ -62,11 +62,11 @@ public class Heap<K extends Comparable<K>, V> {
     public HeapNode<K,V> remove(){
         HeapNode<K,V> topmost = null;
         if (arrayIndex == 0){
-            System.out.println("No more elements to return!!");
+            System.out.println("No more elements to return!!\n");
         }
         else if(arrayIndex == 1){
             topmost = arr[0];
-            System.out.println("This is the last element. No more elements to return.");
+            System.out.println("This is the last element. No more elements to return.\n");
             arrayIndex--;
             arr[arrayIndex] = null;
         }
@@ -130,7 +130,7 @@ public class Heap<K extends Comparable<K>, V> {
     }
 
     public String state(){
-        return "The current state is: "+this.state;
+        return "The current state is: "+this.state+"\n";
     }
 
     public boolean isEmpty(){
@@ -153,11 +153,12 @@ public class Heap<K extends Comparable<K>, V> {
 
     public void display(){
         if (!isEmpty()){
-            System.out.println(state());
+//            System.out.println(state());
             for (int i=0 ; i<arr.length;i++)
                 if (arr[i] != null)
                     System.out.println("arr["+i+"] "+arr[i]);
         }
+        System.out.println("\n");
     }
 
     private void afterRemoving(int index, HeapNode<K,V> node){
