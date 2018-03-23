@@ -208,9 +208,20 @@ public class Heap<K extends Comparable<K>, V> {
     private HeapNode[] changeSize(HeapNode[] arr){
         int newLength = arr.length * 2;
         HeapNode[] arr2 = new HeapNode[newLength];
-        for (int i=0;i<arr.length;i++){
-            arr2[i] = arr[i];
-        }
+//        for (int i=0;i<arr.length;i++){
+//            arr2[i] = arr[i];
+//        }
+        System.arraycopy(arr,0,arr2,0,arrayIndex);
         return arr2;
     }
+
+    public void preOrder(int index){
+        if (index >= arrayIndex)
+            return;
+
+        System.out.println("arr["+index+"] "+arr[index]);
+        preOrder((2 * index) + 1);
+        preOrder((2 * index) +2);
+    }
+
 }
