@@ -216,12 +216,24 @@ public class Heap<K extends Comparable<K>, V> {
     }
 
     public void preOrder(int index){
+        int leftChild = (2 * index) +1;
+        int rightChild = (2 * index) +2;
         if (index >= arrayIndex)
             return;
 
         System.out.println("arr["+index+"] "+arr[index]);
-        preOrder((2 * index) + 1);
-        preOrder((2 * index) +2);
+        preOrder(leftChild);
+        preOrder(rightChild);
     }
 
+    public void postOrder(int index){
+        int leftChild = (2 * index) +1;
+        int rightChild = (2 * index) +2;
+        if (index >= arrayIndex)
+            return;
+
+        postOrder(leftChild);
+        postOrder(rightChild);
+        System.out.println("arr["+index+"] "+arr[index]);
+    }
 }

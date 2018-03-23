@@ -9,23 +9,27 @@ public class Test {
     public static void main(String args[]){
 
         Heap<String, String> heap = new Heap<>("MIN");
-        heap.insert("BS","PineAPPLE");
-        heap.insert("BQ","Oranges");
-        heap.insert("BA","Peaches");
+        heap.insert("S","PineAPPLE");
+        heap.insert("Q","Oranges");
+        heap.insert("A","Peaches");
         System.out.println("Top element is :" + heap.top());
-        heap.insert("BC","Amrood");
-        heap.insert("BP","Banana");
-        heap.insert("BM","Grapes");
-        heap.insert("AB","Apple");
+        heap.insert("C","Amrood");
+        heap.insert("P","Banana");
+        heap.insert("M","Grapes");
+        heap.insert("B","Apple");
 
         heap.display();
 
-        heap.toggle();
+//        heap.toggle();
 
-        heap.display();
+//        heap.display();
 
-//        System.out.println("PreOrder Traversal:");
+        System.out.println("PreOrder Traversal:");
 
-//        heap.preOrder(0);
+        heap.preOrder(0);
+
+        System.out.println("PostOrder Traversal:");
+
+        heap.postOrder(0);
     }
 }
