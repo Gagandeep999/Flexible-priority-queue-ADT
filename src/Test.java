@@ -20,10 +20,6 @@ public class Test {
 
         heap.display();
 
-//        heap.toggle();
-
-//        heap.display();
-
         System.out.println("PreOrder Traversal:");
 
         heap.preOrder(0);
@@ -31,5 +27,9 @@ public class Test {
         System.out.println("PostOrder Traversal:");
 
         heap.postOrder(0);
+
+        System.out.println("InOrder Traversal");
+
+        heap.inOrder(0);
     }
 }
